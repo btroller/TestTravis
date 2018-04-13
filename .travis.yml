@@ -1,4 +1,17 @@
 language: java
+sudo: false
+install: true
+addons:
+  sonarcloud:
+    organization: "btroller-github"
+    token:
+      secure: "c9bfbff8cdc6f86c71f39084a7547a6f15425c36"
 jdk:
-- oraclejdk8
-script: ant build
+  - oraclejdk8
+script:
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+      
